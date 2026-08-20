@@ -42,15 +42,18 @@ label {
 #month-calendar {
   display: block;
   cursor: pointer;
-  width: 400px;
-  height: 240px;
+  margin-left: 20px;
+  width: 420px;
+  height: 320px;
   background-color: lightgreen;
   color: darkblue;
 }
 
 #month-calendar td {
-  width: 57px;
-  height: 40px;
+  width: 48px;
+  height: 36px;
+  background-color: beige;
+  padding: 4px 2px;
   text-align: center;
 }
 
