@@ -39,18 +39,20 @@ label {
   color: white;
 }
 
-.month-selector {
+#month-calendar {
   display: block;
   width: 400px;
   height: 240px;
   background-color: lightgreen;
+  color: darkblue;
 }
 
-.month-selector td {
+#month-calendar td {
   width: 57px;
   height: 40px;
+  align: center;
 }
 
-.month-selector.day {
+#month-calendar.day {
   cursor: pointer;
 }
