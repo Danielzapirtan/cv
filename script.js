@@ -101,3 +101,35 @@ function checkOverlaping(start, end) {
   return false;
 }
 
+function renderCalendar(year, month) {
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const firstDay = (new Date(year, month, 1).getDay() + 6) % 7;
+  let calendarHTML =
+    `<table><tr><th>lun</th><th>mar</th><th>mie</th><th>joi</th><th>vin</th><th>sâm</th><th>dum</th></tr><tr>`;
+  let dayCount = 1;
+  for (let i = 0; i < 42; i++) {
+    if (i >= firstDay && dayCount <= daysInMonth) {
+      calendarHTML += `<td><span class="day">${dayCount}</span></td>`;
+      dayCount++;
+    } else {
+      calendarHTML += `<td></td>`;
+    }
+    if (i % 7 === 6 && dayCount <= daysInMonth) {
+      calendarHTML += `</tr><tr>`;
+    }
+    if (dayCount > daysInMonth && i % 7 === 6) {
+      break;
+    }
+  }
+  calendarHTML += `</tr></table>`;
+  const calendar = document.getElementById("month-calendar");
+  calendar.innerHTML = `${calendarHTML}`;
+  const days1 = calendar.querySelectorAll(".day");
+  days1.forEach((day1) => {
+    day1.addEventListener('click', function() {
+      date.value = new Date(year, month, day1.textContent);
+    });
+  });
+}
+
+renderCalendar(2026, 7);

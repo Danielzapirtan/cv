@@ -19,15 +19,6 @@ label {
   color: blue;
 }
 
-table {
-  border-collapse: collapse;
-}
-
-th,td {
-  border: 1px solid black;
-  padding: 8px;
-}
-
 .formpanel {
   background-color: lightyellow;
   border: 1px solid black;
@@ -43,8 +34,18 @@ th,td {
   padding: 10px;
 }
 
-td {
-  color: white;
-  background-color: darkblue;
+table {
+  display: block;
+  width: 400px;
+  height: 240px;
+  background-color: lightgreen;
 }
 
+table td {
+  width: 57px;
+  height: 40px;
+}
+
+table.day {
+  cursor: pointer;
+}
