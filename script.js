@@ -128,8 +128,9 @@ function renderCalendar(year, month) {
   const days1 = calendar.querySelectorAll(".day");
   days1.forEach((day1) => {
     day1.addEventListener('click', function() {
-      const date2 = new Date(year, month, parseInt(day1.textContent));
+      const date2 = new Date(year, month, parseInt(day1.textContent) + 1);
       date.value = new Date(date2).toISOString().slice(0,10);
+      filter.click();
     });
   });
 }
