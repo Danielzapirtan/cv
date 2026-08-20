@@ -34,18 +34,23 @@ label {
   padding: 10px;
 }
 
-table {
+.activ td {
+  background-color: darkblue;
+  color: white;
+}
+
+.month-selector {
   display: block;
   width: 400px;
   height: 240px;
   background-color: lightgreen;
 }
 
-table td {
+.month-selector td {
   width: 57px;
   height: 40px;
 }
 
-table.day {
+.month-selector.day {
   cursor: pointer;
 }

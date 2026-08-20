@@ -23,6 +23,7 @@ formular.addEventListener("submit", function (e) {
     return;
   }
   const tr = document.createElement("tr");
+  tr.classList.add("activ");
   tr.innerHTML = `<td>${dateValue}</td><td>${nameValue}</td><td>${descValue}</td><td>${startValue}</td><td>${endValue}</td><td><input type="checkbox"></td>`;
   table.appendChild(tr);
   localStorage.setItem("db", JSON.stringify(table.innerHTML));
