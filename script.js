@@ -130,7 +130,6 @@ function renderCalendar(year, month) {
     day1.addEventListener('click', function() {
       const date2 = new Date(year, month, parseInt(day1.textContent) + 1);
       date.value = new Date(date2).toISOString().slice(0,10);
-      filter.click();
     });
   });
 }
