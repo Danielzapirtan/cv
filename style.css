@@ -10,6 +10,11 @@
   display: block;
 }
 
+main {
+  display: flex;
+  flex-direction: row;
+}
+
 button {
   background-color: green;
   color: white;
