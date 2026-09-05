@@ -4,7 +4,7 @@ const formular = document.getElementById("form");
 const aplica = document.getElementById("aplica");
 const table = document.getElementById("table");
 const dbItem = "cvdb";
-//localStorage.removeItem(dbItem);
+localStorage.removeItem(dbItem);
 const getdb = localStorage.getItem(dbItem);
 if (getdb) {
   table.innerHTML = JSON.parse(getdb);
