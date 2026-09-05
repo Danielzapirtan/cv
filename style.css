@@ -44,17 +44,44 @@ label {
   color: white;
 }
 
+.calendar-panel {
+  margin-left: 20px;
+  max-width: 900px;
+  background-color: lightgreen;
+  color: darkblue;
+  padding: 12px;
+}
+
+.calendar-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.calendar-navigation p {
+  flex: 1;
+  margin: 0;
+  text-align: center;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.calendar-navigation button {
+  min-width: 40px;
+  font-size: 1.2rem;
+}
+
+.calendar-navigation button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 #month-calendar {
   display: grid;
   grid-template-columns: repeat(3, minmax(260px, 1fr));
   gap: 16px;
-  margin-left: 20px;
-  max-width: 900px;
-  max-height: 720px;
-  overflow-y: auto;
-  background-color: lightgreen;
-  color: darkblue;
-  padding: 12px;
 }
 
 #month-calendar table {
@@ -92,13 +119,19 @@ label {
 
   #month-calendar {
     grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+
+  .calendar-panel {
     margin: 0 0 20px;
   }
 }
 
 @media (max-width: 560px) {
+  .calendar-panel {
+    padding: 8px;
+  }
+
   #month-calendar {
     grid-template-columns: 1fr;
-    max-height: none;
   }
 }
