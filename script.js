@@ -105,20 +105,27 @@ function checkOverlaping(start, end) {
   return false;
 }
 
-function renderCalendar(year, month, monthCount = 18) {
+const monthNames = [
+  "ianuarie", "februarie", "martie", "aprilie", "mai", "iunie",
+  "iulie", "august", "septembrie", "octombrie", "noiembrie", "decembrie"
+];
+const monthCount = 18;
+const visibleMonthCount = 3;
+let calendarStart = 0;
+
+function renderCalendar(year, month, start = 0) {
   const calendar = document.getElementById("month-calendar");
+  const rangeLabel = document.getElementById("calendar-range");
+  const previousButton = document.getElementById("previous-months");
+  const nextButton = document.getElementById("next-months");
   calendar.innerHTML = "";
 
-  for (let monthOffset = 0; monthOffset < monthCount; monthOffset++) {
+  for (let monthOffset = start; monthOffset < Math.min(start + visibleMonthCount, monthCount); monthOffset++) {
     const monthDate = new Date(year, month + monthOffset, 1);
     const monthYear = monthDate.getFullYear();
     const monthNumber = monthDate.getMonth();
     const daysInMonth = new Date(monthYear, monthNumber + 1, 0).getDate();
     const firstDay = (monthDate.getDay() + 6) % 7;
-    const monthNames = [
-      "ianuarie", "februarie", "martie", "aprilie", "mai", "iunie",
-      "iulie", "august", "septembrie", "octombrie", "noiembrie", "decembrie"
-    ];
     const monthTable = document.createElement("table");
     monthTable.innerHTML =
       `<caption>${monthNames[monthNumber]} ${monthYear}</caption>
@@ -150,7 +157,28 @@ function renderCalendar(year, month, monthCount = 18) {
       date.value = day.dataset.date;
     });
   });
+
+  const firstMonth = new Date(year, month + start, 1);
+  const lastMonth = new Date(year, month + Math.min(start + visibleMonthCount, monthCount) - 1, 1);
+  rangeLabel.textContent = `${monthNames[firstMonth.getMonth()]} ${firstMonth.getFullYear()} - ${monthNames[lastMonth.getMonth()]} ${lastMonth.getFullYear()}`;
+  previousButton.disabled = start === 0;
+  nextButton.disabled = start + visibleMonthCount >= monthCount;
 }
 
 const today = new Date();
-renderCalendar(today.getFullYear(), today.getMonth());
+const calendarYear = today.getFullYear();
+const calendarMonth = today.getMonth();
+const previousMonthsButton = document.getElementById("previous-months");
+const nextMonthsButton = document.getElementById("next-months");
+
+previousMonthsButton.addEventListener("click", () => {
+  calendarStart = Math.max(0, calendarStart - visibleMonthCount);
+  renderCalendar(calendarYear, calendarMonth, calendarStart);
+});
+
+nextMonthsButton.addEventListener("click", () => {
+  calendarStart = Math.min(monthCount - visibleMonthCount, calendarStart + visibleMonthCount);
+  renderCalendar(calendarYear, calendarMonth, calendarStart);
+});
+
+renderCalendar(calendarYear, calendarMonth, calendarStart);

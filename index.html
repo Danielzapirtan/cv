@@ -17,8 +17,19 @@
       </h2>
     </header>
     <main>
-      <div id="month-calendar">
-      </div>
+      <section class="calendar-panel" aria-label="Calendar">
+        <div class="calendar-navigation">
+          <button type="button" id="previous-months" aria-label="Afiseaza lunile anterioare">
+            &lt;
+          </button>
+          <p id="calendar-range" aria-live="polite"></p>
+          <button type="button" id="next-months" aria-label="Afiseaza lunile urmatoare">
+            &gt;
+          </button>
+        </div>
+        <div id="month-calendar">
+        </div>
+      </section>
       <div>
         <div class="formpanel non-hidden">
           <form id="form">
