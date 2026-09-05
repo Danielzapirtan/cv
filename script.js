@@ -105,36 +105,52 @@ function checkOverlaping(start, end) {
   return false;
 }
 
-function renderCalendar(year, month) {
-  const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const firstDay = (new Date(year, month, 1).getDay() + 6) % 7;
-  let calendarHTML =
-    `<table><tr><th>lun</th><th>mar</th><th>mie</th><th>joi</th><th>vin</th><th>sâm</th><th>dum</th></tr><tr>`;
-  let dayCount = 1;
-  for (let i = 0; i < 42; i++) {
-    if (i >= firstDay && dayCount <= daysInMonth) {
-      calendarHTML += `<td><span class="day">${dayCount}</span></td>`;
-      dayCount++;
-    } else {
-      calendarHTML += `<td></td>`;
-    }
-    if (i % 7 === 6 && dayCount <= daysInMonth) {
-      calendarHTML += `</tr><tr>`;
-    }
-    if (dayCount > daysInMonth && i % 7 === 6) {
-      break;
-    }
-  }
-  calendarHTML += `</tr></table>`;
+function renderCalendar(year, month, monthCount = 18) {
   const calendar = document.getElementById("month-calendar");
-  calendar.innerHTML = `${calendarHTML}`;
-  const days1 = calendar.querySelectorAll(".day");
-  days1.forEach((day1) => {
-    day1.addEventListener('click', function() {
-      const date2 = new Date(year, month, parseInt(day1.textContent) + 1);
-      date.value = new Date(date2).toISOString().slice(0,10);
+  calendar.innerHTML = "";
+
+  for (let monthOffset = 0; monthOffset < monthCount; monthOffset++) {
+    const monthDate = new Date(year, month + monthOffset, 1);
+    const monthYear = monthDate.getFullYear();
+    const monthNumber = monthDate.getMonth();
+    const daysInMonth = new Date(monthYear, monthNumber + 1, 0).getDate();
+    const firstDay = (monthDate.getDay() + 6) % 7;
+    const monthNames = [
+      "ianuarie", "februarie", "martie", "aprilie", "mai", "iunie",
+      "iulie", "august", "septembrie", "octombrie", "noiembrie", "decembrie"
+    ];
+    const monthTable = document.createElement("table");
+    monthTable.innerHTML =
+      `<caption>${monthNames[monthNumber]} ${monthYear}</caption>
+      <tr><th>lun</th><th>mar</th><th>mie</th><th>joi</th><th>vin</th><th>sâm</th><th>dum</th></tr>`;
+
+    let dayCount = 1;
+    while (dayCount <= daysInMonth) {
+      const row = monthTable.insertRow();
+      for (let dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++) {
+        const cell = row.insertCell();
+        if ((row.rowIndex === 1 && dayOfWeek < firstDay) || dayCount > daysInMonth) {
+          continue;
+        }
+
+        const day = document.createElement("span");
+        day.className = "day";
+        day.textContent = dayCount;
+        day.dataset.date = `${monthYear}-${String(monthNumber + 1).padStart(2, "0")}-${String(dayCount).padStart(2, "0")}`;
+        cell.appendChild(day);
+        dayCount++;
+      }
+    }
+
+    calendar.appendChild(monthTable);
+  }
+
+  calendar.querySelectorAll(".day").forEach((day) => {
+    day.addEventListener("click", function() {
+      date.value = day.dataset.date;
     });
   });
 }
 
-renderCalendar(2026, 8);
+const today = new Date();
+renderCalendar(today.getFullYear(), today.getMonth());

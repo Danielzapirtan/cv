@@ -45,23 +45,60 @@ label {
 }
 
 #month-calendar {
-  display: block;
-  cursor: pointer;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(260px, 1fr));
+  gap: 16px;
   margin-left: 20px;
-  width: 420px;
-  height: 320px;
+  max-width: 900px;
+  max-height: 720px;
+  overflow-y: auto;
   background-color: lightgreen;
   color: darkblue;
+  padding: 12px;
+}
+
+#month-calendar table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+#month-calendar caption {
+  font-weight: bold;
+  text-transform: capitalize;
+  padding: 4px;
 }
 
 #month-calendar td {
-  width: 48px;
-  height: 36px;
+  height: 30px;
   background-color: beige;
-  padding: 4px 2px;
   text-align: center;
 }
 
-#month-calendar.day {
+#month-calendar .day {
   cursor: pointer;
+  display: block;
+  padding: 5px 2px;
+}
+
+#month-calendar .day:hover {
+  background-color: lightblue;
+}
+
+@media (max-width: 900px) {
+  main {
+    flex-direction: column;
+  }
+
+  #month-calendar {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    margin: 0 0 20px;
+  }
+}
+
+@media (max-width: 560px) {
+  #month-calendar {
+    grid-template-columns: 1fr;
+    max-height: none;
+  }
 }
