@@ -4,13 +4,14 @@ const formular = document.getElementById("form");
 const aplica = document.getElementById("aplica");
 const table = document.getElementById("table");
 const dbItem = "cvdb";
-localStorage.removeItem("db");
+localStorage.removeItem(dbItem);
 const getdb = localStorage.getItem(dbItem);
 if (getdb) {
   table.innerHTML = JSON.parse(getdb);
   forgetOldRex();
 } else {
   table.innerHTML = ``;
+  localStorage.setItem(dbItem, JSON.stringify(table.innerHTML));
 }
 
 formular.addEventListener("submit", function (e) {
