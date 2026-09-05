@@ -3,8 +3,9 @@ date.min = new Date().toISOString().slice(0,10);
 const formular = document.getElementById("form");
 const aplica = document.getElementById("aplica");
 const table = document.getElementById("table");
-//localStorage.removeItem("db");
-const getdb = localStorage.getItem("db");
+const dbItem = "cvdb";
+//localStorage.removeItem(dbItem);
+const getdb = localStorage.getItem(dbItem);
 if (getdb) {
   table.innerHTML = JSON.parse(getdb);
   forgetOldRex();
@@ -27,7 +28,7 @@ formular.addEventListener("submit", function (e) {
   tr.classList.add("activ");
   tr.innerHTML = `<td>${dateValue}</td><td>${nameValue}</td><td>${descValue}</td><td>${startValue}</td><td>${endValue}</td><td><input type="checkbox"></td>`;
   table.appendChild(tr);
-  localStorage.setItem("db", JSON.stringify(table.innerHTML));
+  localStorage.setItem(dbItem, JSON.stringify(table.innerHTML));
   formular.reset();
 });
 
@@ -58,7 +59,7 @@ clearAll.addEventListener("click", function(e) {
     }
   });
   toRemove.forEach(rec => rec.remove()); 
-  localStorage.setItem("db", JSON.stringify(table.innerHTML));
+  localStorage.setItem(dbItem, JSON.stringify(table.innerHTML));
 });
 
 function forgetOldRex() {
@@ -73,7 +74,7 @@ function forgetOldRex() {
     }
   });
   toRemove.forEach(rec => rec.remove());
-  localStorage.setItem("db", JSON.stringify(table.innerHTML));
+  localStorage.setItem(dbItem, JSON.stringify(table.innerHTML));
 }
 
 function checkOverlaping(start, end) {
