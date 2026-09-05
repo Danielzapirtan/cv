@@ -134,4 +134,4 @@ function renderCalendar(year, month) {
   });
 }
 
-renderCalendar(2026, 7);
+renderCalendar(2026, 8);
