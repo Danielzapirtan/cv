@@ -3,6 +3,7 @@ date.min = new Date().toISOString().slice(0,10);
 const formular = document.getElementById("form");
 const aplica = document.getElementById("aplica");
 const table = document.getElementById("table");
+localStorage.removeItem("db");
 const getdb = localStorage.getItem("db");
 if (getdb) {
   table.innerHTML = JSON.parse(getdb);
